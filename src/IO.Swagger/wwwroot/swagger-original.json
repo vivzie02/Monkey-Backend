@@ -1,0 +1,101 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "Index Card API",
+    "description" : "This is a simple server for loading and saving index cards",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://dev.monkeys.com/v1",
+    "description" : "Dev Server"
+  }, {
+    "url" : "https://prod.monkeys.com/v1",
+    "description" : "Prod Server"
+  } ],
+  "tags" : [ {
+    "name" : "books",
+    "description" : "Operations about the written books"
+  } ],
+  "paths" : {
+    "/books" : {
+      "get" : {
+        "tags" : [ "books" ],
+        "summary" : "Get longest books",
+        "responses" : {
+          "200" : {
+            "description" : "sucessfully got books by length",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "oneOf" : [ {
+                      "$ref" : "#/components/schemas/Book"
+                    } ]
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "books" ],
+        "summary" : "Create a new book",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/books_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfully created new book"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Book" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "string",
+            "example" : "Word"
+          },
+          "numberOfWords" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        },
+        "description" : "Model for Book",
+        "xml" : {
+          "name" : "Book"
+        }
+      },
+      "books_body" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "string",
+            "example" : "Word"
+          },
+          "numberOfWords" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      }
+    }
+  }
+}
