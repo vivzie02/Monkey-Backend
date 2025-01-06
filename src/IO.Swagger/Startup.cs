@@ -101,6 +101,16 @@ namespace IO.Swagger
 
             services.AddDbContext<BookContext>(options =>
                 options.UseNpgsql(connectionString));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp",
+                    builder => builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         /// <summary>
@@ -111,6 +121,8 @@ namespace IO.Swagger
         /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors("AllowAngularApp");
+
             app.UseRouting();
 
             //TODO: Uncomment this if you need wwwroot folder

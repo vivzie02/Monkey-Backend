@@ -29,10 +29,11 @@ namespace IO.Swagger.Mapper
         /// </summary>
         /// <param name="book"></param>
         /// <returns></returns>
-        public static BookDTO ToDTO(Book book)
+        public static BookOutputDTO ToOutputDTO(Book book)
         {
-            return new BookDTO
+            return new BookOutputDTO
             {
+                Id = book.Id,
                 Content = book.Content,
                 NumberOfWords = book.NumberOfWords,
             };

@@ -27,16 +27,18 @@ namespace IO.Swagger.Services
         /// Save a new book
         /// </summary>
         /// <returns></returns>
-        public async Task<BookDTO> SaveBook(BookDTO book)
+        public async Task<BookOutputDTO> SaveBook(BookDTO book)
         {
             var bookEntity = BookMapper.ToEntity(book);
+
+            Console.WriteLine($"saving book {book.ToJson()}");
 
             try
             {
                 _context.Books.Add(bookEntity);
                 await _context.SaveChangesAsync().ConfigureAwait(false);
                 Console.WriteLine("Successfully created new Book");
-                return BookMapper.ToDTO(bookEntity);
+                return BookMapper.ToOutputDTO(bookEntity);
             }
             catch (Exception ex)
             {

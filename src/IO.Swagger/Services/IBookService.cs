@@ -13,6 +13,6 @@ namespace IO.Swagger.Services
         /// Save a new book
         /// </summary>
         /// <returns></returns>
-        Task<BookDTO> SaveBook(BookDTO book);
+        Task<BookOutputDTO> SaveBook(BookDTO book);
     }
 }

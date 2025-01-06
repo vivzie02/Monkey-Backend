@@ -75,9 +75,7 @@ namespace IO.Swagger.Controllers
         [SwaggerOperation("BooksPost")]
         public async virtual Task<IActionResult> BooksPost([FromBody] BookDTO body)
         {
-            BookDTO response;
-
-            response = await _bookService.SaveBook(body).ConfigureAwait(false);
+            var response = await _bookService.SaveBook(body).ConfigureAwait(false);
 
             if(response == null)
             {
