@@ -2,6 +2,7 @@
 using IO.Swagger.DTOs;
 using IO.Swagger.Mapper;
 using IO.Swagger.Models;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +15,11 @@ namespace IO.Swagger.Services
     /// </summary>
     public class BookService: IBookService
     {
+        /// <summary>
+        /// Logger
+        /// </summary>
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
         private readonly BookContext _context;
 
         /// <summary>
@@ -37,12 +43,12 @@ namespace IO.Swagger.Services
             {
                 _context.Books.Add(bookEntity);
                 await _context.SaveChangesAsync().ConfigureAwait(false);
-                Console.WriteLine("Successfully created new Book");
+                log.Info("Successfully created new Book");
                 return BookMapper.ToOutputDTO(bookEntity);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Connection failed: {ex.Message}");
+                log.Error("could not upload book", ex);
                 return null;
             }
         }

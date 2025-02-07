@@ -96,6 +96,8 @@ namespace IO.Swagger
                 });
 
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IMonkeyManagerService, MonkeyManagerService>();
+            services.AddScoped<ITextGeneratorService, TextGeneratorService>();
 
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_DefaultConnection");
 
@@ -111,6 +113,9 @@ namespace IO.Swagger
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+            var task = DictionaryService.InitDictionary();
+            task.Wait();
         }
 
         /// <summary>

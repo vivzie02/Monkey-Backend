@@ -79,7 +79,7 @@ namespace IO.Swagger.Controllers
 
             if(response == null)
             {
-                return Problem();
+                return Problem("Could not upload book");
             }
 
             return Ok(response);
