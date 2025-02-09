@@ -14,6 +14,12 @@ namespace IO.Swagger.DTOs
         /// <summary>
         /// MonkeyId
         /// </summary>
+        [DataMember(Name = "monkeyId")]
+        public Guid MonkeyId { get; set; }
+
+        /// <summary>
+        /// MonkeyId
+        /// </summary>
         [DataMember(Name = "numberOfMonkeys")]
         public int NumberOfMonkeys { get; set; }
 

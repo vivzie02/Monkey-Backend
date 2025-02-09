@@ -69,6 +69,7 @@ namespace IO.Swagger.Services
                             Content = bookBuilder.ToString(),
                             NumberOfWords = wordLength
                         };
+                        Debug.WriteLine($"Saving book: {book}");
                         log.Info("Saving book...");
                         log.Info(book);
                         await _bookService.SaveBook(book);

@@ -15,7 +15,6 @@ namespace IO.Swagger.Controllers
     [ApiController]
     public class TextController : ControllerBase
     {
-        private readonly IMonkeyManagerService _monkeyManagerService;
         private readonly ITextGeneratorService _textGeneratorService;
 
         /// <summary>
@@ -23,9 +22,8 @@ namespace IO.Swagger.Controllers
         /// </summary>
         /// <param name="monkeyManagerService"></param>
         /// <param name="textGeneratorService"></param>
-        public TextController(IMonkeyManagerService monkeyManagerService, ITextGeneratorService textGeneratorService)
+        public TextController(ITextGeneratorService textGeneratorService)
         {
-            _monkeyManagerService = monkeyManagerService;
             _textGeneratorService = textGeneratorService;
         }
 
@@ -45,11 +43,45 @@ namespace IO.Swagger.Controllers
 
             for(int i = 0; i < monkeyInputDTO.NumberOfMonkeys; i++)
             {
-                var monkeyOutputDto = _monkeyManagerService.StartTask(_textGeneratorService.GenerateText);
+                var monkeyOutputDto = MonkeyManagerService.StartTask(_textGeneratorService.GenerateText);
                 monkeys.Add(monkeyOutputDto);
             }
 
             return Ok(monkeys);
+        }
+
+        /// <summary>
+        /// Start writing text
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/v1/StopWriting")]
+        [Produces("application/json")]
+        [SwaggerOperation("StopWriting")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        public virtual IActionResult StopWriting([FromBody] MonkeyInputDTO monkeyInputDTO)
+        {
+            var monkeyOutputDto = MonkeyManagerService.StopTask(monkeyInputDTO.MonkeyId);
+
+            return Ok(monkeyOutputDto);
+        }
+
+        /// <summary>
+        /// Start writing text
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/v1/StopAll")]
+        [Produces("application/json")]
+        [SwaggerOperation("StopAll")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        public virtual IActionResult StopWritingAll()
+        {
+            var message = MonkeyManagerService.StopAll();
+
+            return Ok(message);
         }
     }
 }

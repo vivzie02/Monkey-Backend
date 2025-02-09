@@ -59,30 +59,5 @@ namespace IO.Swagger.Controllers
             : default(List<Object>);            //TODO: Change the data returned
             return new ObjectResult(example);
         }
-
-        /// <summary>
-        /// Create a new book
-        /// </summary>
-        /// <param name="body"></param>
-        /// <response code="201">Successfully created new book</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpPost]
-        [Route("/v1/books")]
-        [Consumes("application/json")]
-        [ProducesResponseType(201)]
-        [ProducesResponseType(500)]
-        [ValidateModelState]
-        [SwaggerOperation("BooksPost")]
-        public async virtual Task<IActionResult> BooksPost([FromBody] BookDTO body)
-        {
-            var response = await _bookService.SaveBook(body).ConfigureAwait(false);
-
-            if(response == null)
-            {
-                return Problem("Could not upload book");
-            }
-
-            return Ok(response);
-        }
     }
 }

@@ -9,16 +9,16 @@ namespace IO.Swagger.Services
     /// <summary>
     /// MonkeyManagerService
     /// </summary>
-    public class MonkeyManagerService : IMonkeyManagerService
+    public static class MonkeyManagerService
     {
-        private readonly Dictionary<Guid, CancellationTokenSource> _tasks = new Dictionary<Guid, CancellationTokenSource>();
+        private static readonly Dictionary<Guid, CancellationTokenSource> _tasks = new Dictionary<Guid, CancellationTokenSource>();
 
         /// <summary>
         /// Starts a new Monkey Task
         /// </summary>
         /// <param name="taskFunction"></param>
         /// <returns></returns>
-        public MonkeyOutputDTO StartTask(Func<CancellationToken, Task> taskFunction)
+        public static MonkeyOutputDTO StartTask(Func<CancellationToken, Task> taskFunction)
         {
             var jobId = Guid.NewGuid();
             var cts = new CancellationTokenSource();
@@ -35,17 +35,41 @@ namespace IO.Swagger.Services
         /// <summary>
         /// StopTask
         /// </summary>
-        /// <param name="jobId"></param>
+        /// <param name="monkeyId"></param>
         /// <returns></returns>
-        public bool StopTask(Guid jobId)
+        public static MessageDTO StopTask(Guid monkeyId)
         {
-            if(_tasks.TryGetValue(jobId, out var cts))
+            if(_tasks.TryGetValue(monkeyId, out var cts))
             {
                 cts.Cancel();
-                _tasks.Remove(jobId);
-                return true;
+                _tasks.Remove(monkeyId);
+                return new MessageDTO
+                {
+                    Message = "Successfully stopped task"
+                };
             }
-            return false;
+            return new MessageDTO
+            {
+                Message = "Task not found"
+            };
+        }
+
+        /// <summary>
+        /// StopAll
+        /// </summary>
+        /// <returns></returns>
+        public static MessageDTO StopAll()
+        {
+            foreach(var monkeyId in _tasks.Keys)
+            {
+                _tasks[monkeyId].Cancel();
+            }
+            _tasks.Clear();
+
+            return new MessageDTO
+            {
+                Message = "Successfully stopped task"
+            };
         }
     }
 }
