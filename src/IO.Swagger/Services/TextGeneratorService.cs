@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using IO.Swagger.DTOs;
+using Microsoft.Extensions.Hosting;
 
 namespace IO.Swagger.Services
 {
@@ -44,8 +45,6 @@ namespace IO.Swagger.Services
         /// <exception cref="System.NotImplementedException"></exception>
         public async Task GenerateText(CancellationToken cancellationToken)
         {
-            log.Info("Started Text service");
-
             var bookBuilder = new StringBuilder();
             var wordLength = 0;
 

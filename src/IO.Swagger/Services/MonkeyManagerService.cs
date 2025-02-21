@@ -1,6 +1,8 @@
-﻿using IO.Swagger.DTOs;
+﻿using IO.Swagger.Constants;
+using IO.Swagger.DTOs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +30,8 @@ namespace IO.Swagger.Services
             
             return new MonkeyOutputDTO
             {
-                MonkeyId = jobId
+                MonkeyId = jobId,
+                Status = MonkeyStatus.RUNNING
             };
         }
 

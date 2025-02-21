@@ -20,7 +20,6 @@ namespace IO.Swagger.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="monkeyManagerService"></param>
         /// <param name="textGeneratorService"></param>
         public TextController(ITextGeneratorService textGeneratorService)
         {
