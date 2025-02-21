@@ -1,9 +1,9 @@
 ﻿using IO.Swagger.Database;
 using IO.Swagger.DTOs;
 using IO.Swagger.Mapper;
-using IO.Swagger.Models;
-using Microsoft.AspNetCore.Mvc;
+using log4net;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 
@@ -12,16 +12,22 @@ namespace IO.Swagger.Services
     /// <summary>
     /// Service for saving and retrieving books
     /// </summary>
-    public class BookService: IBookService
+    public class BookService : IBookService
     {
-        private readonly BookContext _context;
+        /// <summary>
+        /// Logger
+        /// </summary>
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="context"></param>
-        public BookService(BookContext context) { 
-            _context = context;
+        /// <param name="serviceScopeFactory"></param>
+        public BookService(IServiceScopeFactory serviceScopeFactory)
+        {
+            _serviceScopeFactory = serviceScopeFactory;
         }
         /// <summary>
         /// Save a new book
@@ -35,14 +41,18 @@ namespace IO.Swagger.Services
 
             try
             {
-                _context.Books.Add(bookEntity);
-                await _context.SaveChangesAsync().ConfigureAwait(false);
-                Console.WriteLine("Successfully created new Book");
-                return BookMapper.ToOutputDTO(bookEntity);
+                using(var scope = _serviceScopeFactory.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<BookContext>();
+                    dbContext.Books.Add(bookEntity);
+                    await dbContext.SaveChangesAsync().ConfigureAwait(false);
+                    log.Info("Successfully saved new Book");
+                    return BookMapper.ToOutputDTO(bookEntity);
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Connection failed: {ex.Message}");
+                log.Error("could not upload book", ex);
                 return null;
             }
         }

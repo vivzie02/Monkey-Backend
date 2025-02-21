@@ -1,6 +1,7 @@
+using log4net.Config;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.VisualBasic;
+using System.IO;
 
 namespace IO.Swagger
 {
@@ -15,6 +16,7 @@ namespace IO.Swagger
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
             CreateWebHostBuilder(args).Build().Run();
         }
 
@@ -26,6 +28,6 @@ namespace IO.Swagger
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
-            
+
     }
 }
