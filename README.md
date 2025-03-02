@@ -1,6 +1,6 @@
 # IO.Swagger - ASP.NET Core 2.0 Server
 
-This is a simple server for loading and saving index cards
+This is a simple server for loading and saving books
 
 ## Run
 

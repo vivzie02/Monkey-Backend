@@ -37,7 +37,7 @@ namespace IO.Swagger.Services
         {
             var bookEntity = BookMapper.ToEntity(book);
 
-            Console.WriteLine($"saving book {book.ToJson()}");
+            log.Info($"saving book");
 
             try
             {

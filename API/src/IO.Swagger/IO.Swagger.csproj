@@ -7,7 +7,7 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>IO.Swagger</AssemblyName>
     <PackageId>IO.Swagger</PackageId>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="3.0.3" />
