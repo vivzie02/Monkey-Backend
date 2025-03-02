@@ -1,18 +1,8 @@
-﻿using log4net;
-using Microsoft.Extensions.Logging;
+﻿using MonkeyServer.DTOs;
 using System;
-using System.Diagnostics;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
-using Microsoft.Extensions.Options;
-using System.Text;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.IO;
-using MonkeyServer.DTOs;
-using Microsoft.Extensions.Hosting;
-using MonkeyServer;
 
 namespace MonkeyServer.Services
 {
