@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace IO.Swagger.DTOs
+namespace MonkeyServer.DTOs
 {
     public class BookOutputDTO
     {

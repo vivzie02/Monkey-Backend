@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System;
 
-namespace IO.Swagger.DTOs
+namespace MonkeyServer.DTOs
 {
     /// <summary>
     /// MonkeyOutputDTO

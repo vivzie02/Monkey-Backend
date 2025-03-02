@@ -1,13 +1,14 @@
-﻿using IO.Swagger.Database;
-using IO.Swagger.DTOs;
-using IO.Swagger.Mapper;
-using log4net;
+﻿using log4net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MonkeyServer;
+using MonkeyServer.Database;
+using MonkeyServer.DTOs;
+using MonkeyServer.Mapper;
 using System;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// Service for saving and retrieving books
@@ -41,7 +42,7 @@ namespace IO.Swagger.Services
 
             try
             {
-                using(var scope = _serviceScopeFactory.CreateScope())
+                using (var scope = _serviceScopeFactory.CreateScope())
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<BookContext>();
                     dbContext.Books.Add(bookEntity);

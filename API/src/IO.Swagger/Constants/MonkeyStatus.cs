@@ -1,4 +1,4 @@
-﻿namespace IO.Swagger.Constants
+﻿namespace MonkeyServer.Constants
 {
     /// <summary>
     /// MonkeyStatus

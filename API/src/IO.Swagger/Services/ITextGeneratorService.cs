@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// ITextGeneratorService

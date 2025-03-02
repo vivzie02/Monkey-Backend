@@ -1,12 +1,12 @@
-﻿using IO.Swagger.Constants;
-using IO.Swagger.DTOs;
+﻿using MonkeyServer.Constants;
+using MonkeyServer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// MonkeyManagerService
@@ -27,7 +27,7 @@ namespace IO.Swagger.Services
 
             _tasks.Add(jobId, cts);
             taskFunction(cts.Token);
-            
+
             return new MonkeyOutputDTO
             {
                 MonkeyId = jobId,
@@ -42,7 +42,7 @@ namespace IO.Swagger.Services
         /// <returns></returns>
         public static MessageDTO StopTask(Guid monkeyId)
         {
-            if(_tasks.TryGetValue(monkeyId, out var cts))
+            if (_tasks.TryGetValue(monkeyId, out var cts))
             {
                 cts.Cancel();
                 _tasks.Remove(monkeyId);
@@ -63,7 +63,7 @@ namespace IO.Swagger.Services
         /// <returns></returns>
         public static MessageDTO StopAll()
         {
-            foreach(var monkeyId in _tasks.Keys)
+            foreach (var monkeyId in _tasks.Keys)
             {
                 _tasks[monkeyId].Cancel();
             }

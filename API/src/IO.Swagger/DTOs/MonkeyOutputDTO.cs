@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System;
 
-namespace IO.Swagger.DTOs
+namespace MonkeyServer.DTOs
 {
     /// <summary>
     /// MonkeyOutputDTO
@@ -21,13 +21,13 @@ namespace IO.Swagger.DTOs
         /// Status
         /// </summary>
         [DataMember(Name = "Status")]
-        public string? Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Message
         /// </summary>
         [DataMember(Name = "Message")]
-        public string? Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

@@ -1,8 +1,8 @@
-﻿using IO.Swagger.DTOs;
-using IO.Swagger.Models;
+﻿using MonkeyServer.DTOs;
+using MonkeyServer.Models;
 using System;
 
-namespace IO.Swagger.Mapper
+namespace MonkeyServer.Mapper
 {
     /// <summary>
     /// BookMapper

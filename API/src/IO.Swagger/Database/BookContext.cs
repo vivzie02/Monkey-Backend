@@ -1,7 +1,7 @@
-﻿using IO.Swagger.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MonkeyServer.Models;
 
-namespace IO.Swagger.Database
+namespace MonkeyServer.Database
 {
     /// <summary>
     /// BookContext

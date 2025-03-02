@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// DictionaryService

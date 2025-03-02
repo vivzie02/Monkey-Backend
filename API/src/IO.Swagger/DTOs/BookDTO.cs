@@ -12,7 +12,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace IO.Swagger.DTOs
+namespace MonkeyServer.DTOs
 {
     /// <summary>
     /// 

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace IO.Swagger
+namespace MonkeyServer
 {
     /// <summary>
     /// Program

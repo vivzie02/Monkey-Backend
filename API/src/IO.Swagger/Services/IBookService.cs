@@ -1,8 +1,8 @@
-﻿using IO.Swagger.DTOs;
-using IO.Swagger.Models;
+﻿using MonkeyServer.Models;
+using MonkeyServer.DTOs;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// Service for saving and retrieving books

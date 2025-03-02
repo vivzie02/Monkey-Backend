@@ -10,21 +10,17 @@ using System.Text;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
-using IO.Swagger.DTOs;
+using MonkeyServer.DTOs;
 using Microsoft.Extensions.Hosting;
+using MonkeyServer;
 
-namespace IO.Swagger.Services
+namespace MonkeyServer.Services
 {
     /// <summary>
     /// TextGeneratorService
     /// </summary>
     public class TextGeneratorService : ITextGeneratorService
     {
-        /// <summary>
-        /// Logger
-        /// </summary>
-        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
-
         private readonly IBookService _bookService;
 
         private const int GENERATION_DELAY = 10;
@@ -43,7 +39,7 @@ namespace IO.Swagger.Services
         /// <summary>
         /// generate random Text
         /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         public async Task GenerateText(CancellationToken cancellationToken)
         {
             var bookBuilder = new StringBuilder();
@@ -59,9 +55,9 @@ namespace IO.Swagger.Services
                     bookBuilder.Append(" ");
                     wordLength++;
                 }
-                else if(wordLength > 0)
+                else if (wordLength > 0)
                 {
-                    if(wordLength >= 3)
+                    if (wordLength >= 3)
                     {
                         var book = new BookDTO()
                         {

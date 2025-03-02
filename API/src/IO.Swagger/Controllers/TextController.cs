@@ -1,13 +1,13 @@
-﻿using IO.Swagger.DTOs;
-using IO.Swagger.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MonkeyServer.DTOs;
+using MonkeyServer.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IO.Swagger.Controllers
+namespace MonkeyServer.Controllers
 {
     /// <summary>
     /// TextController
@@ -40,7 +40,7 @@ namespace IO.Swagger.Controllers
         {
             var monkeys = new List<MonkeyOutputDTO>();
 
-            for(int i = 0; i < monkeyInputDTO.NumberOfMonkeys; i++)
+            for (int i = 0; i < monkeyInputDTO.NumberOfMonkeys; i++)
             {
                 var monkeyOutputDto = MonkeyManagerService.StartTask(_textGeneratorService.GenerateText);
                 monkeys.Add(monkeyOutputDto);
