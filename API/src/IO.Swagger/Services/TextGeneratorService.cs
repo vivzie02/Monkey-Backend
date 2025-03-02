@@ -29,6 +29,7 @@ namespace IO.Swagger.Services
 
         private const int GENERATION_DELAY = 10;
         private const int CANCELLATION_CHANCE = 17;
+        private readonly Random _random = new Random();
 
         /// <summary>
         /// Constructor
@@ -54,23 +55,19 @@ namespace IO.Swagger.Services
 
                 if (DictionaryService.IsWordInDictionary(word))
                 {
-                    Debug.WriteLine($"Found word in dictionary: {word}");
                     bookBuilder.Append(word);
                     bookBuilder.Append(" ");
                     wordLength++;
                 }
                 else if(wordLength > 0)
                 {
-                    if(wordLength >= 2)
+                    if(wordLength >= 3)
                     {
                         var book = new BookDTO()
                         {
                             Content = bookBuilder.ToString(),
                             NumberOfWords = wordLength
                         };
-                        Debug.WriteLine($"Saving book: {book}");
-                        log.Info("Saving book...");
-                        log.Info(book);
                         await _bookService.SaveBook(book);
                     }
                     bookBuilder = new StringBuilder();
@@ -81,34 +78,28 @@ namespace IO.Swagger.Services
             }
         }
 
-        private static string RandomWord()
+        private string RandomWord()
         {
             var wordBuilder = new StringBuilder();
 
             do
             {
                 wordBuilder.Append(RandomLetter());
-            } while (CANCELLATION_CHANCE < GetSecureRandomNumber(1, 100));
+            } while (CANCELLATION_CHANCE < GetRandomNumber(0, 101));
 
             return wordBuilder.ToString();
         }
 
-        private static char RandomLetter()
+        private char RandomLetter()
         {
             const string options = "ABCDEFGHIJKLMNOPQRSTUVXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöüß";
             var optionsLength = options.Length;
-            return options[GetSecureRandomNumber(0, optionsLength - 1)];
+            return options[GetRandomNumber(0, optionsLength)];
         }
 
-        private static int GetSecureRandomNumber(int minValue, int maxValue)
+        private int GetRandomNumber(int minValue, int maxValue)
         {
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                byte[] randomBytes = new byte[4];
-                rng.GetBytes(randomBytes);
-                int randomInt = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue; // Convert to positive number
-                return minValue + (randomInt % (maxValue - minValue + 1));
-            }
+            return _random.Next(minValue, maxValue);
         }
     }
 }

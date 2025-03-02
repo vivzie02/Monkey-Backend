@@ -14,7 +14,7 @@ namespace IO.Swagger.Services
         /// <summary>
         /// Dictionary for words
         /// </summary>
-        private static List<string> Dictionary = new List<string>();
+        private static HashSet<string> Dictionary = new HashSet<string>();
 
         /// <summary>
         /// InitDictionary
@@ -23,7 +23,7 @@ namespace IO.Swagger.Services
         public async static Task InitDictionary()
         {
             var dictionaryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "german-words.json");
-            Dictionary = JsonConvert.DeserializeObject<List<string>>(await File.ReadAllTextAsync(dictionaryPath));
+            Dictionary = JsonConvert.DeserializeObject<HashSet<string>>(await File.ReadAllTextAsync(dictionaryPath));
         }
 
         /// <summary>
