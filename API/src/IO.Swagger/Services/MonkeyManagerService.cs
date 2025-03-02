@@ -26,7 +26,7 @@ namespace IO.Swagger.Services
             var cts = new CancellationTokenSource();
 
             _tasks.Add(jobId, cts);
-            Task.Run(() => taskFunction(cts.Token));
+            taskFunction(cts.Token);
             
             return new MonkeyOutputDTO
             {

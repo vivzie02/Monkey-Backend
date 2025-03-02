@@ -50,7 +50,7 @@ namespace IO.Swagger.Controllers
         }
 
         /// <summary>
-        /// Start writing text
+        /// Stop writing text
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -67,7 +67,7 @@ namespace IO.Swagger.Controllers
         }
 
         /// <summary>
-        /// Start writing text
+        /// Stop all
         /// </summary>
         /// <returns></returns>
         [HttpPost]
