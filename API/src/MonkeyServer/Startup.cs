@@ -94,6 +94,8 @@ namespace MonkeyServer
 
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<ITextGeneratorService, TextGeneratorService>();
+            services.AddScoped<IGrammarCheckService, GrammarCheckService>();
+            services.AddHttpClient();
 
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_DefaultConnection");
 

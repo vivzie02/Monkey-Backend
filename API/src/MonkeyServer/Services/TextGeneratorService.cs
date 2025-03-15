@@ -12,6 +12,7 @@ namespace MonkeyServer.Services
     public class TextGeneratorService : ITextGeneratorService
     {
         private readonly IBookService _bookService;
+        private readonly IGrammarCheckService _grammarCheckService;
 
         private const int GENERATION_DELAY = 10;
         private const int CANCELLATION_CHANCE = 17;
@@ -21,9 +22,11 @@ namespace MonkeyServer.Services
         /// Constructor
         /// </summary>
         /// <param name="bookService"></param>
-        public TextGeneratorService(IBookService bookService)
+        /// <param name="grammarCheckService"></param>
+        public TextGeneratorService(IBookService bookService, IGrammarCheckService grammarCheckService)
         {
             _bookService = bookService;
+            _grammarCheckService = grammarCheckService;
         }
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace MonkeyServer.Services
                 }
                 else if (wordLength > 0)
                 {
-                    if (wordLength >= 3)
+                    if (wordLength >= 3 && (await _grammarCheckService.CheckGrammar(bookBuilder.ToString())))
                     {
                         var book = new BookDTO()
                         {

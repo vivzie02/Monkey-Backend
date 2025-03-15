@@ -16,6 +16,20 @@ services:
     networks:
       - postgres_network
 
+  grammar:
+    build: 
+      context: ./Grammar
+      dockerfile: Dockerfile
+    container_name: grammar_check
+    ports:
+      - "8000:8000"
+    volumes:
+      - grammar_data:/grammar_tool/data
+    depends_on:
+      - db
+    networks:
+      - postgres_network
+
   api:
     build:
       context: ./API/src/MonkeyServer
@@ -25,14 +39,16 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     env_file: ".env"
     ports:
-      - "8080:5000"
+      - "8080:8080"
     depends_on:
       - db
+      - grammar
     networks:
       - postgres_network
 
 volumes:
   postgres_data:
+  grammar_data:
 
 networks:
   postgres_network:
