@@ -23,6 +23,7 @@ namespace MonkeyServer.Services
         /// constructor
         /// </summary>
         /// <param name="httpClientFactory"></param>
+        /// <param name="configuration"></param>
         public GrammarCheckService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             client = httpClientFactory.CreateClient();

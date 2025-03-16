@@ -33,11 +33,11 @@ namespace MonkeyServer.Controllers
         [SwaggerOperation("StartWriting")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public virtual IActionResult StartWriting([FromBody] MonkeyInputDTO monkeyInputDTO)
+        public virtual IActionResult StartWriting([FromBody] StartMonkeyInputDTO startMonkeyInputDTO)
         {
             var monkeys = new List<MonkeyOutputDTO>();
 
-            for (int i = 0; i < monkeyInputDTO.NumberOfMonkeys; i++)
+            for (int i = 0; i < startMonkeyInputDTO.NumberOfMonkeys; i++)
             {
                 var monkeyOutputDto = MonkeyManagerService.StartTask(_textGeneratorService.GenerateText);
                 monkeys.Add(monkeyOutputDto);
@@ -56,7 +56,7 @@ namespace MonkeyServer.Controllers
         [SwaggerOperation("StopWriting")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public virtual IActionResult StopWriting([FromBody] MonkeyInputDTO monkeyInputDTO)
+        public virtual IActionResult StopWriting([FromBody] StartMonkeyInputDTO monkeyInputDTO)
         {
             var monkeyOutputDto = MonkeyManagerService.StopTask(monkeyInputDTO.MonkeyId);
 

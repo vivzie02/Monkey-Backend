@@ -95,22 +95,16 @@ namespace MonkeyServer
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<ITextGeneratorService, TextGeneratorService>();
             services.AddScoped<IGrammarCheckService, GrammarCheckService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddHttpClient();
 
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_DefaultConnection");
 
             services.AddDbContext<BookContext>(options =>
                 options.UseNpgsql(connectionString));
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAngularApp",
-                    builder => builder
-                    .WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
-            });
+            services.AddDbContext<UserContext>(options =>
+                options.UseNpgsql(connectionString));
 
             var task = DictionaryService.InitDictionary();
             task.Wait();

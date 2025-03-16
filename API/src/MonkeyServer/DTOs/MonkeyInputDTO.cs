@@ -9,7 +9,7 @@ namespace MonkeyServer.DTOs
     /// MonkeyOutputDTO
     /// </summary>
     [DataContract]
-    public class MonkeyInputDTO
+    public class StartMonkeyInputDTO
     {
         /// <summary>
         /// MonkeyId
@@ -22,6 +22,5 @@ namespace MonkeyServer.DTOs
         /// </summary>
         [DataMember(Name = "numberOfMonkeys")]
         public int NumberOfMonkeys { get; set; }
-
     }
 }

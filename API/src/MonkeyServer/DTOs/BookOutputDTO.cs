@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace MonkeyServer.DTOs
 {
+    /// <summary>
+    /// BookOutputDTO
+    /// </summary>
     public class BookOutputDTO
     {
         /// <summary>

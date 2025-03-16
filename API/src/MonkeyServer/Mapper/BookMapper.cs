@@ -1,5 +1,5 @@
 ﻿using MonkeyServer.DTOs;
-using MonkeyServer.Models;
+using MonkeyServer.Entities;
 using System;
 
 namespace MonkeyServer.Mapper

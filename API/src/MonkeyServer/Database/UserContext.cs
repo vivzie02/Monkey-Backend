@@ -4,20 +4,20 @@ using MonkeyServer.Entities;
 namespace MonkeyServer.Database
 {
     /// <summary>
-    /// BookContext
+    /// UserContext
     /// </summary>
-    public class BookContext : DbContext
+    public class UserContext : DbContext
     {
         /// <summary>
-        /// Books Table
+        /// Users Table
         /// </summary>
-        public DbSet<Book> Books { get; set; }
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="options"></param>
-        public BookContext(DbContextOptions<BookContext> options) : base(options)
+        public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
 
         }
@@ -28,7 +28,7 @@ namespace MonkeyServer.Database
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>().ToTable("books");
+            modelBuilder.Entity<User>().ToTable("users");
         }
     }
 }

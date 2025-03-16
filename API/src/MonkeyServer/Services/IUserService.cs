@@ -4,14 +4,15 @@ using System.Threading.Tasks;
 namespace MonkeyServer.Services
 {
     /// <summary>
-    /// Service for saving and retrieving books
+    /// IUserService
     /// </summary>
-    public interface IBookService
+    public interface IUserService
     {
         /// <summary>
-        /// Save a new book
+        /// CreateUser
         /// </summary>
+        /// <param name="createUserInputDTO"></param>
         /// <returns></returns>
-        Task<BookOutputDTO> SaveBook(BookDTO book);
+        Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO);
     }
 }
