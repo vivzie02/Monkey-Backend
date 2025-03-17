@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MonkeyServer.DTOs;
 using MonkeyServer.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MonkeyServer.Controllers
@@ -33,15 +35,20 @@ namespace MonkeyServer.Controllers
         [Produces("application/json")]
         [SwaggerOperation("CreateUser")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public virtual async Task<IActionResult> CreateUserAsync([FromBody] CreateUserInputDTO createUserInputDTO)
+        public virtual async Task<IActionResult> CreateUserAsync([FromBody] CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken)
         {
             CreateUserOutputDTO userOutput;
             try
             {
-                userOutput = await _userService.CreateUser(createUserInputDTO).ConfigureAwait(false);
+                userOutput = await _userService.CreateUser(createUserInputDTO, cancellationToken).ConfigureAwait(false);
             }
-            catch(System.Exception ex)
+            catch(DbUpdateException ex)
+            {
+                return StatusCode(400, new { message = "User already exists" });
+            }
+            catch (System.Exception ex)
             {
                 return StatusCode(500, new {message = "An error occurred while creating the new user"});
             }

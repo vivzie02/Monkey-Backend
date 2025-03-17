@@ -1,4 +1,5 @@
 ﻿using MonkeyServer.DTOs;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MonkeyServer.Services
@@ -12,7 +13,8 @@ namespace MonkeyServer.Services
         /// CreateUser
         /// </summary>
         /// <param name="createUserInputDTO"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO);
+        Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken);
     }
 }

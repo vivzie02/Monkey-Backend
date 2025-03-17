@@ -1,6 +1,8 @@
 ﻿using MonkeyServer.DTOs;
 using MonkeyServer.Entities;
+using MonkeyServer.Services.Security;
 using System;
+using static MonkeyServer.Constants.Constants;
 
 namespace MonkeyServer.Mapper
 {
@@ -16,13 +18,15 @@ namespace MonkeyServer.Mapper
         /// <returns></returns>
         public static User ToEntity(CreateUserInputDTO createUserInputDTO)
         {
-            //TODO: Add password hashing
+            var salt = PasswordHasherService.GenerateSalt();
+            var password = PasswordHasherService.ComputeHash(createUserInputDTO.Password, salt, HASHING_ITERATIONS);
 
             return new User
             {
                 UserId = Guid.NewGuid(),
                 Username = createUserInputDTO.Username,
-                Password = createUserInputDTO.Password
+                Salt = salt,
+                Password = password
             };
         }
 

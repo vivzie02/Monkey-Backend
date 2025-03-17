@@ -23,10 +23,10 @@ namespace MonkeyServer.Entities
         [Required(ErrorMessage = "Username cannot be empty")]
         public string Username { get; set; }
         /// <summary>
-        /// salt
+        /// Salt
         /// </summary>
         [Column("salt")]
-        public string salt { get; set; }
+        public string Salt { get; set; }
         /// <summary>
         /// Password
         /// </summary>

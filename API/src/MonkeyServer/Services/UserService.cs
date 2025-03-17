@@ -1,9 +1,11 @@
 ﻿using log4net;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MonkeyServer.Database;
 using MonkeyServer.DTOs;
 using MonkeyServer.Mapper;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MonkeyServer.Services
@@ -30,23 +32,31 @@ namespace MonkeyServer.Services
         /// CreateUser
         /// </summary>
         /// <param name="createUserInputDTO"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO)
+        public async Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken)
         {
-            var userEntity = UserMapper.ToEntity(createUserInputDTO);
-
             log.Info($"saving user");
+
+            //check if user exists
+            if (await _dbContext.Users.AnyAsync(user => string.Equals(user.Username, createUserInputDTO.Username)).ConfigureAwait(false))
+            {
+                log.Info("User already exists");
+                throw new DbUpdateException("User already exists");
+            }
+
+            var userEntity = UserMapper.ToEntity(createUserInputDTO);
 
             try
             {
-                _dbContext.Users.Add(userEntity);
+                await _dbContext.Users.AddAsync(userEntity, cancellationToken).ConfigureAwait(false);
                 await _dbContext.SaveChangesAsync().ConfigureAwait(false);
                 log.Info("Successfully saved new User");
                 return UserMapper.ToOutputDTO(userEntity);
             }
             catch (Exception ex)
             {
-                log.Error("could not upload user", ex);
+                log.Error("could not create user", ex);
                 throw;
             }
         }
