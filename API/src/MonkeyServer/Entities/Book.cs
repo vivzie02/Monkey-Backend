@@ -25,8 +25,8 @@ namespace MonkeyServer.Entities
         /// <summary>
         /// Number of Words
         /// </summary>
-        [Column("number_of_words")]
-        [Required(ErrorMessage = "Number of words cannot be empty")]
-        public int NumberOfWords { get; set; }
+        [Column("words")]
+        [Required(ErrorMessage = "Words cannot be empty")]
+        public int Words { get; set; }
     }
 }

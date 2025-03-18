@@ -20,7 +20,7 @@ namespace MonkeyServer.Mapper
             {
                 Id = Guid.NewGuid(),
                 Content = bookDTO.Content,
-                NumberOfWords = bookDTO.NumberOfWords
+                Words = bookDTO.Words
             };
         }
 
@@ -35,7 +35,7 @@ namespace MonkeyServer.Mapper
             {
                 Id = book.Id,
                 Content = book.Content,
-                NumberOfWords = book.NumberOfWords,
+                NumberOfWords = book.Words,
             };
         }
     }

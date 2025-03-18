@@ -55,7 +55,7 @@ namespace MonkeyServer.Services
                         var book = new BookDTO()
                         {
                             Content = bookBuilder.ToString(),
-                            NumberOfWords = wordLength
+                            Words = wordLength
                         };
                         await _bookService.SaveBookAsync(book);
                     }
