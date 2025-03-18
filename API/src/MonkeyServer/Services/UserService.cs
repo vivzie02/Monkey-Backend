@@ -34,7 +34,7 @@ namespace MonkeyServer.Services
         /// <param name="createUserInputDTO"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken)
+        public async Task<CreateUserOutputDTO> CreateUserAsync(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken)
         {
             log.Info($"saving user");
 

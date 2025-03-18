@@ -42,7 +42,7 @@ namespace MonkeyServer.Controllers
             CreateUserOutputDTO userOutput;
             try
             {
-                userOutput = await _userService.CreateUser(createUserInputDTO, cancellationToken).ConfigureAwait(false);
+                userOutput = await _userService.CreateUserAsync(createUserInputDTO, cancellationToken).ConfigureAwait(false);
             }
             catch(DbUpdateException ex)
             {

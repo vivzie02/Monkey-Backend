@@ -15,6 +15,6 @@ namespace MonkeyServer.Services
         /// <param name="createUserInputDTO"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<CreateUserOutputDTO> CreateUser(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken);
+        Task<CreateUserOutputDTO> CreateUserAsync(CreateUserInputDTO createUserInputDTO, CancellationToken cancellationToken);
     }
 }

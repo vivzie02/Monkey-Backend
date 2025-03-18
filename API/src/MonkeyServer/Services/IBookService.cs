@@ -12,6 +12,6 @@ namespace MonkeyServer.Services
         /// Save a new book
         /// </summary>
         /// <returns></returns>
-        Task<BookOutputDTO> SaveBook(BookDTO book);
+        Task<BookOutputDTO> SaveBookAsync(BookDTO book);
     }
 }

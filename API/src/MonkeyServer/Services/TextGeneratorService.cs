@@ -57,7 +57,7 @@ namespace MonkeyServer.Services
                             Content = bookBuilder.ToString(),
                             NumberOfWords = wordLength
                         };
-                        await _bookService.SaveBook(book);
+                        await _bookService.SaveBookAsync(book);
                     }
                     bookBuilder = new StringBuilder();
                     wordLength = 0;

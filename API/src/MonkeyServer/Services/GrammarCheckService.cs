@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MonkeyServer.Services
@@ -51,6 +52,9 @@ namespace MonkeyServer.Services
                 var response = await client.PostAsync(GrammarCheckBaseUrl, content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
+
+                //clean string of tabs, new lines and carriage returns
+                responseString = Regex.Replace(responseString, @"\t|\n|\r", "");
 
                 log.Info("<<< Finished Grammar check");
                 return string.Equals(responseString, "true");

@@ -34,7 +34,7 @@ namespace MonkeyServer.Services
         /// Save a new book
         /// </summary>
         /// <returns></returns>
-        public async Task<BookOutputDTO> SaveBook(BookDTO book)
+        public async Task<BookOutputDTO> SaveBookAsync(BookDTO book)
         {
             var bookEntity = BookMapper.ToEntity(book);
 
