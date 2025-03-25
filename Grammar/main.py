@@ -1,6 +1,7 @@
 import language_tool_python
 from transformers import pipeline
 from flask import Flask, jsonify, request
+import re
 
 
 grammar_tool = language_tool_python.LanguageTool("de-AT")
@@ -9,11 +10,18 @@ logic_checker = pipeline("text-classification", model="oliverguhr/german-sentime
 
 app = Flask(__name__)
 
+def is_short_form(sentence):
+    # Check if sentence contains only uppercase words of length 2-4
+    return all(re.fullmatch(r"[A-ZÄÖÜ]{2,4}", word) for word in sentence.split())
+
 @app.route('/grammarCheck', methods = ['POST'])
 def check_sentence():
     print("checking grammar")
 
     sentence = request.form.get('sentence')
+
+    if(is_short_form(sentence)):
+        return jsonify(False)
 
     grammar_issues = grammar_tool.check(sentence)
 
