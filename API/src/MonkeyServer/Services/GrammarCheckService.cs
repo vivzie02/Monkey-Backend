@@ -1,10 +1,9 @@
 ﻿using log4net;
-using log4net.Core;
 using Microsoft.Extensions.Configuration;
+using MonkeyServer.DTOs;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -49,16 +48,16 @@ namespace MonkeyServer.Services
             {
                 var response = await client.PostAsync(GrammarCheckBaseUrl, content);
 
-                var responseString = await response.Content.ReadAsStringAsync();
+                var responseObject = JsonConvert.DeserializeObject<GrammarOutputDTO>(await response.Content.ReadAsStringAsync());
 
                 log.Info("<<< Finished Grammar check");
-                return string.Equals(responseString, "true");
+                return responseObject.IsCorrect;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 log.Error("Error while checking grammar", ex);
                 return false;
-            }       
+            }
         }
     }
 }
