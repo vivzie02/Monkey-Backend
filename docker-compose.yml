@@ -24,7 +24,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - grammar_data:/grammar_tool/data
+      - grammar_data:/app
     depends_on:
       - db
     networks:
@@ -34,7 +34,7 @@ services:
     build:
       context: ./API/src/MonkeyServer
       dockerfile: Dockerfile  
-    container_name: aspnet_api
+    container_name: monkey_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     env_file: ".env"
