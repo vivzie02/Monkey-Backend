@@ -14,6 +14,7 @@ namespace MonkeyServer.Services
         private readonly IBookService _bookService;
         private readonly IGrammarCheckService _grammarCheckService;
 
+        private const string OPTIONS = "ABCDEFGHIJKLMNOPQRSTUVXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöüß";
         private const int GENERATION_DELAY = 10;
         private const int CANCELLATION_CHANCE = 17;
         private readonly Random _random = new Random();
@@ -55,7 +56,7 @@ namespace MonkeyServer.Services
                         var book = new BookDTO()
                         {
                             Content = bookBuilder.ToString(),
-                            NumberOfWords = wordLength
+                            Words = wordLength
                         };
                         await _bookService.SaveBook(book);
                     }
@@ -81,9 +82,8 @@ namespace MonkeyServer.Services
 
         private char RandomLetter()
         {
-            const string options = "ABCDEFGHIJKLMNOPQRSTUVXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöüß";
-            var optionsLength = options.Length;
-            return options[GetRandomNumber(0, optionsLength)];
+            var optionsLength = OPTIONS.Length;
+            return OPTIONS[GetRandomNumber(0, optionsLength)];
         }
 
         private int GetRandomNumber(int minValue, int maxValue)

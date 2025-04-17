@@ -31,8 +31,8 @@ namespace MonkeyServer.DTOs
         /// Gets or Sets NumberOfWords
         /// </summary>
 
-        [DataMember(Name = "numberOfWords")]
-        public int NumberOfWords { get; set; }
+        [DataMember(Name = "words")]
+        public int Words { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -43,7 +43,7 @@ namespace MonkeyServer.DTOs
             var sb = new StringBuilder();
             sb.Append("class BooksBody {\n");
             sb.Append("  Content: ").Append(Content).Append("\n");
-            sb.Append("  NumberOfWords: ").Append(NumberOfWords).Append("\n");
+            sb.Append("  NumberOfWords: ").Append(Words).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -86,8 +86,8 @@ namespace MonkeyServer.DTOs
                     Content.Equals(other.Content)
                 ) &&
                 (
-                    NumberOfWords == other.NumberOfWords ||
-                    NumberOfWords.Equals(other.NumberOfWords)
+                    Words == other.Words ||
+                    Words.Equals(other.Words)
                 );
         }
 

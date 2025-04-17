@@ -25,8 +25,8 @@ namespace MonkeyServer.Models
         /// <summary>
         /// Number of Words
         /// </summary>
-        [Column("number_of_words")]
+        [Column("words")]
         [Required(ErrorMessage = "Number of words cannot be empty")]
-        public int NumberOfWords { get; set; }
+        public int Words { get; set; }
     }
 }
